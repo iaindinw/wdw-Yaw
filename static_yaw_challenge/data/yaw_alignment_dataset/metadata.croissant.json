@@ -1,0 +1,704 @@
+{
+  "@context": {
+    "@language": "en",
+    "@vocab": "https://schema.org/",
+    "citeAs": "cr:citeAs",
+    "column": "cr:column",
+    "conformsTo": "dct:conformsTo",
+    "cr": "http://mlcommons.org/croissant/",
+    "rai": "http://mlcommons.org/croissant/RAI/",
+    "data": {
+      "@id": "cr:data",
+      "@type": "@json"
+    },
+    "dataType": {
+      "@id": "cr:dataType",
+      "@type": "@vocab"
+    },
+    "dct": "http://purl.org/dc/terms/",
+    "examples": {
+      "@id": "cr:examples",
+      "@type": "@json"
+    },
+    "extract": "cr:extract",
+    "field": "cr:field",
+    "fileProperty": "cr:fileProperty",
+    "fileObject": "cr:fileObject",
+    "fileSet": "cr:fileSet",
+    "format": "cr:format",
+    "includes": "cr:includes",
+    "isLiveDataset": "cr:isLiveDataset",
+    "jsonPath": "cr:jsonPath",
+    "key": "cr:key",
+    "md5": "cr:md5",
+    "parentField": "cr:parentField",
+    "path": "cr:path",
+    "recordSet": "cr:recordSet",
+    "references": "cr:references",
+    "regex": "cr:regex",
+    "repeated": "cr:repeated",
+    "replace": "cr:replace",
+    "samplingRate": "cr:samplingRate",
+    "sc": "https://schema.org/",
+    "separator": "cr:separator",
+    "source": "cr:source",
+    "subField": "cr:subField",
+    "transform": "cr:transform",
+    "om": "http://www.ontology-of-units-of-measure.org/resource/om-2/",
+    "oeo": "http://openenergy-platform.org/ontology/oeo/"
+  },
+  "@type": "sc:Dataset",
+  "name": "IET_OST_Aventa_AV7_SCADA_1Hz",
+  "description": "SCADA telemetry for Aventa AV-7 wind turbine (1 Hz). Parquet columns mapped below. Embedded status dictionary and turbine metadata included.",
+  "conformsTo": "http://mlcommons.org/croissant/1.0",
+  "license": "https://creativecommons.org/licenses/by/3.0/",
+  "citeAs": "Barber, S., Hammer, F., & Marykovskiy, Y. (2025). Aventa AV-7 (6kW) IET-OST Research Wind Turbine SCADA with Static Yaw Offset [Data set]. Zenodo. https://doi.org/10.5281/zenodo.16276333",
+  "datePublished": "2025-10-13",
+  "version": "0.0.1",
+  "creator": [
+    {
+      "@type": "sc:Person",
+      "givenName": "Sarah",
+      "familyName": "Barber",
+      "identifier": "https://orcid.org/0000-0002-7329-6434",
+      "sameAs": "https://orcid.org/0000-0002-7329-6434"
+    },
+    {
+      "@type": "sc:Person",
+      "givenName": "Florian",
+      "familyName": "Hammer",
+      "identifier": "https://orcid.org/0009-0005-7871-7516",
+      "sameAs": "https://orcid.org/0009-0005-7871-7516"
+    },
+    {
+      "@type": "sc:Person",
+      "givenName": "Yuriy",
+      "familyName": "Marykovskiy",
+      "identifier": "https://orcid.org/0000-0002-6570-6966",
+      "sameAs": "https://orcid.org/0000-0002-6570-6966"
+    }
+  ],
+  "about": {
+    "@type": "sc:Thing",
+    "name": "IET-OST Research Wind Turbine",
+    "description": "Aventa AV-7 (6kW) model IET-OST Research Wind Turbine, owned by IET-OST and located in Taggenberg (ZH), Lat:47.52 Long:8.68236.",
+    "additionalType": "oeo:OEO_00000044",
+    "identifier": "https://www.ost.ch/en/research-and-consulting-services/technology/renewable-energies-and-environmental-engineering/iet-institute-for-energy-technology/wind-energy/infrastructure"
+  },
+  "distribution": [
+    {
+      "@type": "cr:FileObject",
+      "@id": "scada_train_file",
+      "name": "scada_train_file",
+      "contentUrl": "train.parquet",
+      "encodingFormat": "application/x-parquet",
+      "sha256": "61d665aadb709f95771e536cd05bae0e7b580891930d962e44062fb3b7bdc898"
+    },
+    {
+      "@type": "cr:FileObject",
+      "@id": "scada_test_file",
+      "name": "scada_test_file",
+      "contentUrl": "test.parquet",
+      "encodingFormat": "application/x-parquet",
+      "sha256": "38faa7fcc611cbc7fb542513f07af636eda33f4e0ff8b693df2e62fd5b791a63"
+    }
+  ],
+  "recordSet": [
+    {
+      "@type": "cr:RecordSet",
+      "@id": "train",
+      "name": "SCADA 1 Hz Training Data",
+      "key": {
+        "@id": "scada/datetime"
+      },
+      "field": [
+        {
+          "@type": "cr:Field",
+          "@id": "train/datetime",
+          "name": "train/datetime",
+          "description": "Measurement Date and Time in YYYY-MM-DD HH-MM-SS.SSS",
+          "dataType": "sc:DateTime",
+          "source": {
+            "fileObject": {
+              "@id": "scada_train_file"
+            },
+            "extract": {
+              "column": "datetime"
+            }
+          }
+        },
+        {
+          "@type": "cr:Field",
+          "@id": "train/rotor_speed",
+          "name": "train/rotor_speed",
+          "description": "Rotor speed in RPM",
+          "dataType": "sc:Float",
+          "source": {
+            "fileObject": {
+              "@id": "scada_train_file"
+            },
+            "extract": {
+              "column": "rotor_speed"
+            }
+          }
+        },
+        {
+          "@type": "cr:Field",
+          "@id": "train/generator_speed",
+          "name": "train/generator_speed",
+          "description": "Generator speed in RPM",
+          "dataType": "sc:Float",
+          "source": {
+            "fileObject": {
+              "@id": "scada_train_file"
+            },
+            "extract": {
+              "column": "generator_speed"
+            }
+          }
+        },
+        {
+          "@type": "cr:Field",
+          "@id": "train/generator_temperature",
+          "name": "train/generator_temperature",
+          "description": "Stator temperature in C",
+          "dataType": "sc:Float",
+          "source": {
+            "fileObject": {
+              "@id": "scada_train_file"
+            },
+            "extract": {
+              "column": "generator_temperature"
+            }
+          },
+          "unit": {
+            "@id": "om:degreeCelsius"
+          }
+        },
+        {
+          "@type": "cr:Field",
+          "@id": "train/wind_speed",
+          "name": "train/wind_speed",
+          "description": "Windspeed in m/s",
+          "dataType": "sc:Float",
+          "source": {
+            "fileObject": {
+              "@id": "scada_train_file"
+            },
+            "extract": {
+              "column": "wind_speed"
+            }
+          },
+          "unit": {
+            "@id": "om:metrePerSecond-Time"
+          }
+        },
+        {
+          "@type": "cr:Field",
+          "@id": "train/power_output",
+          "name": "train/power_output",
+          "description": "Converter active power in kW",
+          "dataType": "sc:Float",
+          "source": {
+            "fileObject": {
+              "@id": "scada_train_file"
+            },
+            "extract": {
+              "column": "power_output"
+            }
+          },
+          "unit": {
+            "@id": "om:kilowatt"
+          }
+        },
+        {
+          "@type": "cr:Field",
+          "@id": "train/relative_wind_direction",
+          "name": "train/relative_wind_direction",
+          "description": "Wind direction w.r.t. nacelle measured in degrees",
+          "dataType": "sc:Float",
+          "source": {
+            "fileObject": {
+              "@id": "scada_train_file"
+            },
+            "extract": {
+              "column": "relative_wind_direction"
+            }
+          },
+          "unit": {
+            "@id": "om:degree"
+          }
+        },
+        {
+          "@type": "cr:Field",
+          "@id": "train/supply_voltage",
+          "name": "train/supply_voltage",
+          "description": "System supply voltage 24V ",
+          "dataType": "sc:Float",
+          "source": {
+            "fileObject": {
+              "@id": "scada_train_file"
+            },
+            "extract": {
+              "column": "supply_voltage"
+            }
+          },
+          "unit": {
+            "@id": "om:volt"
+          }
+        },
+        {
+          "@type": "cr:Field",
+          "@id": "train/blade_pitch_deg",
+          "name": "train/blade_pitch_deg",
+          "description": "Pitch angle in degrees",
+          "dataType": "sc:Float",
+          "source": {
+            "fileObject": {
+              "@id": "scada_train_file"
+            },
+            "extract": {
+              "column": "blade_pitch_deg"
+            }
+          },
+          "unit": {
+            "@id": "om:degree"
+          }
+        },
+        {
+          "@type": "cr:Field",
+          "@id": "train/turbine_status",
+          "name": "train/turbine_status",
+          "description": "Turbine status ",
+          "dataType": "sc:Integer",
+          "source": {
+            "fileObject": {
+              "@id": "scada_train_file"
+            },
+            "extract": {
+              "column": "turbine_status"
+            }
+          },
+          "references": {
+            "field": {
+              "@id": "turbine_status_codes/code"
+            }
+          }
+        },
+        {
+          "@type": "cr:Field",
+          "@id": "train/yaw_offset",
+          "name": "train/yaw_offset",
+          "description": "Manually imposed yaw offset",
+          "dataType": "sc:Float",
+          "source": {
+            "fileObject": {
+              "@id": "scada_train_file"
+            },
+            "extract": {
+              "column": "yaw_offset"
+            }
+          },
+          "unit": {
+            "@id": "om:degree"
+          }
+        }
+      ]
+    },
+    {
+      "@type": "cr:RecordSet",
+      "@id": "test",
+      "name": "SCADA 1 Hz Test Data",
+      "key": {
+        "@id": "test/row_id"
+      },
+      "field": [
+        {
+          "@type": "cr:Field",
+          "@id": "test/row_id",
+          "name": "test/row_id",
+          "description": "Table key, external key for test labels data",
+          "dataType": "sc:Text",
+          "source": {
+            "fileObject": {
+              "@id": "scada_test_file"
+            },
+            "extract": {
+              "column": "row_id"
+            }
+          }
+        },
+        {
+          "@type": "cr:Field",
+          "@id": "test/segment_id",
+          "name": "test/segment_id",
+          "description": "ID to identify continious segments of 1 hours",
+          "dataType": "sc:Text",
+          "source": {
+            "fileObject": {
+              "@id": "scada_test_file"
+            },
+            "extract": {
+              "column": "segment_id"
+            }
+          }
+        },
+        {
+          "@type": "cr:Field",
+          "@id": "test/segment_time",
+          "name": "test/segment_time",
+          "description": "Time in seconds relative to the start of the segment.",
+          "dataType": "sc:Integer",
+          "source": {
+            "fileObject": {
+              "@id": "scada_test_file"
+            },
+            "extract": {
+              "column": "segment_time"
+            }
+          }
+        },
+        {
+          "@type": "cr:Field",
+          "@id": "test/rotor_speed",
+          "name": "test/rotor_speed",
+          "description": "Rotor speed in RPM",
+          "dataType": "sc:Float",
+          "source": {
+            "fileObject": {
+              "@id": "scada_test_file"
+            },
+            "extract": {
+              "column": "rotor_speed"
+            }
+          }
+        },
+        {
+          "@type": "cr:Field",
+          "@id": "test/generator_speed",
+          "name": "test/generator_speed",
+          "description": "Generator speed in RPM",
+          "dataType": "sc:Float",
+          "source": {
+            "fileObject": {
+              "@id": "scada_test_file"
+            },
+            "extract": {
+              "column": "generator_speed"
+            }
+          }
+        },
+        {
+          "@type": "cr:Field",
+          "@id": "test/generator_temperature",
+          "name": "test/generator_temperature",
+          "description": "Stator temperature in C",
+          "dataType": "sc:Float",
+          "source": {
+            "fileObject": {
+              "@id": "scada_test_file"
+            },
+            "extract": {
+              "column": "generator_temperature"
+            }
+          },
+          "unit": {
+            "@id": "om:degreeCelsius"
+          }
+        },
+        {
+          "@type": "cr:Field",
+          "@id": "test/wind_speed",
+          "name": "test/wind_speed",
+          "description": "Windspeed in m/s",
+          "dataType": "sc:Float",
+          "source": {
+            "fileObject": {
+              "@id": "scada_test_file"
+            },
+            "extract": {
+              "column": "wind_speed"
+            }
+          },
+          "unit": {
+            "@id": "om:metrePerSecond-Time"
+          }
+        },
+        {
+          "@type": "cr:Field",
+          "@id": "test/power_output",
+          "name": "test/power_output",
+          "description": "Converter active power in kW",
+          "dataType": "sc:Float",
+          "source": {
+            "fileObject": {
+              "@id": "scada_test_file"
+            },
+            "extract": {
+              "column": "power_output"
+            }
+          },
+          "unit": {
+            "@id": "om:kilowatt"
+          }
+        },
+        {
+          "@type": "cr:Field",
+          "@id": "test/relative_wind_direction",
+          "name": "test/relative_wind_direction",
+          "description": "Wind direction w.r.t. nacelle measured in degrees",
+          "dataType": "sc:Float",
+          "source": {
+            "fileObject": {
+              "@id": "scada_test_file"
+            },
+            "extract": {
+              "column": "relative_wind_direction"
+            }
+          },
+          "unit": {
+            "@id": "om:degree"
+          }
+        },
+        {
+          "@type": "cr:Field",
+          "@id": "test/supply_voltage",
+          "name": "test/supply_voltage",
+          "description": "System supply voltage 24V ",
+          "dataType": "sc:Float",
+          "source": {
+            "fileObject": {
+              "@id": "scada_test_file"
+            },
+            "extract": {
+              "column": "supply_voltage"
+            }
+          },
+          "unit": {
+            "@id": "om:volt"
+          }
+        },
+        {
+          "@type": "cr:Field",
+          "@id": "test/blade_pitch_deg",
+          "name": "test/blade_pitch_deg",
+          "description": "Pitch angle in degrees",
+          "dataType": "sc:Float",
+          "source": {
+            "fileObject": {
+              "@id": "scada_test_file"
+            },
+            "extract": {
+              "column": "blade_pitch_deg"
+            }
+          },
+          "unit": {
+            "@id": "om:degree"
+          }
+        },
+        {
+          "@type": "cr:Field",
+          "@id": "test/turbine_status",
+          "name": "test/turbine_status",
+          "description": "Turbine status ",
+          "dataType": "sc:Integer",
+          "source": {
+            "fileObject": {
+              "@id": "scada_test_file"
+            },
+            "extract": {
+              "column": "turbine_status"
+            }
+          },
+          "references": {
+            "field": {
+              "@id": "turbine_status_codes/code"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "@type": "cr:RecordSet",
+      "@id": "turbine_status_codes",
+      "name": "Turbine status code dictionary",
+      "key": {
+        "@id": "turbine_status_codes/code"
+      },
+      "field": [
+        {
+          "@type": "cr:Field",
+          "@id": "turbine_status_codes/code",
+          "name": "turbine_status_codes/code",
+          "dataType": "sc:Integer"
+        },
+        {
+          "@type": "cr:Field",
+          "@id": "turbine_status_codes/description",
+          "name": "turbine_status_codes/description",
+          "dataType": "sc:Text"
+        }
+      ],
+      "data": [
+        {
+          "turbine_status_codes/code": 0,
+          "turbine_status_codes/description": "Initialize system"
+        },
+        {
+          "turbine_status_codes/code": 1,
+          "turbine_status_codes/description": "Feathered position search 1"
+        },
+        {
+          "turbine_status_codes/code": 2,
+          "turbine_status_codes/description": "Feathered position search 2"
+        },
+        {
+          "turbine_status_codes/code": 3,
+          "turbine_status_codes/description": "Feathered position 1"
+        },
+        {
+          "turbine_status_codes/code": 4,
+          "turbine_status_codes/description": "Function test 1"
+        },
+        {
+          "turbine_status_codes/code": 5,
+          "turbine_status_codes/description": "Function test 2"
+        },
+        {
+          "turbine_status_codes/code": 6,
+          "turbine_status_codes/description": "Feathered position 2"
+        },
+        {
+          "turbine_status_codes/code": 7,
+          "turbine_status_codes/description": "Standby position 1"
+        },
+        {
+          "turbine_status_codes/code": 8,
+          "turbine_status_codes/description": "Standby position 2"
+        },
+        {
+          "turbine_status_codes/code": 9,
+          "turbine_status_codes/description": "Standby position 3"
+        },
+        {
+          "turbine_status_codes/code": 10,
+          "turbine_status_codes/description": "Power operation (production mode; pitch regulates above nominal speed)"
+        },
+        {
+          "turbine_status_codes/code": 11,
+          "turbine_status_codes/description": "High wind shutdown (feather to ~80°; auto-resume when winds subside)"
+        },
+        {
+          "turbine_status_codes/code": 12,
+          "turbine_status_codes/description": "Shut down (speed < 25 rpm → return to ~37° standby pitch)"
+        },
+        {
+          "turbine_status_codes/code": 13,
+          "turbine_status_codes/description": "Alarm – fault condition"
+        }
+      ]
+    },
+    {
+      "@type": "cr:RecordSet",
+      "@id": "turbine",
+      "name": "Aventa AV-7 wind turbine metadata (embedded)",
+      "field": [
+        {
+          "@type": "cr:Field",
+          "@id": "turbine/name",
+          "name": "turbine/name",
+          "dataType": "sc:Text"
+        },
+        {
+          "@type": "cr:Field",
+          "@id": "turbine/comments",
+          "name": "turbine/comments",
+          "dataType": "sc:Text"
+        },
+        {
+          "@type": "cr:Field",
+          "@id": "turbine/rotor_diameter_m",
+          "name": "turbine/rotor_diameter_m",
+          "dataType": "sc:Float",
+          "sameAs": {
+            "@id": "oeo:OEO_00020144"
+          },
+          "unit": {
+            "@id": "om:metre"
+          }
+        },
+        {
+          "@type": "cr:Field",
+          "@id": "turbine/hub_height_m",
+          "name": "turbine/hub_height_m",
+          "dataType": "sc:Float",
+          "sameAs": {
+            "@id": "oeo:OEO_00140000"
+          },
+          "unit": {
+            "@id": "om:metre"
+          }
+        },
+        {
+          "@type": "cr:Field",
+          "@id": "turbine/rated_power_W",
+          "name": "turbine/rated_power_W",
+          "dataType": "sc:Float",
+          "sameAs": {
+            "@id": "oeo:OEO_00230001"
+          },
+          "unit": {
+            "@id": "om:watt"
+          }
+        },
+        {
+          "@type": "cr:Field",
+          "@id": "turbine/number_of_blades",
+          "name": "turbine/number_of_blades",
+          "dataType": "sc:Integer"
+        },
+        {
+          "@type": "cr:Field",
+          "@id": "turbine/drivetrain",
+          "name": "turbine/drivetrain",
+          "dataType": "sc:Text"
+        },
+        {
+          "@type": "cr:Field",
+          "@id": "turbine/rotor_orientation",
+          "name": "turbine/rotor_orientation",
+          "dataType": "sc:Text"
+        },
+        {
+          "@type": "cr:Field",
+          "@id": "turbine/gear_ratio",
+          "name": "turbine/gear_ratio",
+          "dataType": "sc:Float",
+          "unit": {
+            "@id": "om:one"
+          }
+        },
+        {
+          "@type": "cr:Field",
+          "@id": "turbine/generator_type",
+          "name": "turbine/generator_type",
+          "dataType": "sc:Text"
+        }
+      ],
+      "data": [
+        {
+          "turbine/name": "IET-OST Research Wind Turbine",
+          "turbine/comments": "Aventa AV-7 (6kW) research turbine owned by IET-OST.",
+          "turbine/rotor_diameter_m": 12.9,
+          "turbine/hub_height_m": 18.0,
+          "turbine/rated_power_W": 6200.0,
+          "turbine/number_of_blades": 3,
+          "turbine/drivetrain": "belt_drive",
+          "turbine/rotor_orientation": "Upwind",
+          "turbine/gear_ratio": 12.0,
+          "turbine/generator_type": "PMSG"
+        }
+      ]
+    }
+  ]
+}
