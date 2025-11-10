@@ -1,0 +1,6 @@
+{
+    "python.defaultInterpreterPath": "${workspaceFolder}/static_yaw_challenge/venv/Scripts/python.exe",
+    "jupyter.notebookFileRoot": "${workspaceFolder}/static_yaw_challenge",
+    "python.terminal.activateEnvironment": true,
+    "python.envFile": "${workspaceFolder}/.env"
+}
