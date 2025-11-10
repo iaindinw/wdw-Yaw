@@ -1,0 +1,30 @@
+# Static Yaw Challenge - Python Dependencies
+
+# Data manipulation
+pandas>=2.0.0
+numpy>=1.24.0
+pyarrow>=14.0.0  # For parquet file support
+
+# Visualization
+matplotlib>=3.7.0
+seaborn>=0.12.0
+plotly>=5.18.0
+
+# Machine Learning
+scikit-learn>=1.3.0
+xgboost>=2.0.0
+lightgbm>=4.0.0
+
+# Statistical Analysis
+scipy>=1.11.0
+statsmodels>=0.14.0
+
+# Utilities
+jupyter>=1.0.0
+ipython>=8.12.0
+tqdm>=4.65.0  # Progress bars
+notebook>=7.0.0
+
+# Optional: For advanced time series
+# tslearn>=0.6.0
+# prophet>=1.1.0
